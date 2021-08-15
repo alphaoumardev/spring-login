@@ -7,7 +7,6 @@
 */
 package com.login.springlogin.register;
 
-import com.login.springlogin.email.EmailSender;
 import com.login.springlogin.users.User;
 import com.login.springlogin.users.UserRole;
 import com.login.springlogin.users.UserService;
@@ -21,7 +20,7 @@ public class RegistrationService
 {
     private final EmailValidator emailValidator;
     private final UserService userService;
-    private final EmailSender emailSender;
+//    private final EmailSender emailSender;
 
     public String register(RegistrationRequest request)
     {
@@ -31,7 +30,7 @@ public class RegistrationService
             throw new IllegalStateException("The email is not valid try again");
         }
         String token =userService.signUp(new User(request.getName(),request.getUsername(),request.getPassword(),request.getEmail(), UserRole.USER));
-        emailSender.send(request.getEmail(),"oumardialo98@qq.com");
+//        emailSender.send(request.getEmail(),"oumardialo98@qq.com");
         return token;
     }
 
