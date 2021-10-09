@@ -8,6 +8,7 @@
 package com.login.springlogin.register.token;
 
 import com.login.springlogin.users.User;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Entity
+@Data
 public class Comfirmation
 {
     @Id
@@ -43,10 +45,7 @@ public class Comfirmation
         this.user=user;
     }
 
-    public void saveComfirmation(Comfirmation comfirmationToken)
-    {
 
-    }
 
 
 }

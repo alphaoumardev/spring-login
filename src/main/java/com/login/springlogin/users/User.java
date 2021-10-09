@@ -7,10 +7,7 @@
 */
 package com.login.springlogin.users;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,15 +21,16 @@ import java.util.Collections;
 @Entity
 @EqualsAndHashCode
 @NoArgsConstructor
+@Data
 public class User implements UserDetails
 {
     @Id
     @SequenceGenerator(name="Student",sequenceName="Student",allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="Student")
     private Long id;
-    private String name;
     private String username;
     private String password;
+    private String name;
     private String email;
     private boolean locked=false;
     private boolean enabled=false;
@@ -41,7 +39,6 @@ public class User implements UserDetails
 
 
     public User(String name, String username, String password, String email, UserRole userRole) {
-        this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;

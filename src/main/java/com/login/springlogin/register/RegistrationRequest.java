@@ -1,25 +1,17 @@
-/*
-  Created by:oumar
-  Project:spring-login
-  Name:RegistrationRequest
-  Date: 8/14/2021
-  Time: 11:40 AM
-*/
 package com.login.springlogin.register;
 
-import lombok.*;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@EqualsAndHashCode
-@ToString
+import javax.persistence.*;
+
+@Data
+@Entity
 public class RegistrationRequest
 {
+    @Id
+    int Id;
     private String name;
     private String username;
     private String password;
     private String email;
-
-
 }

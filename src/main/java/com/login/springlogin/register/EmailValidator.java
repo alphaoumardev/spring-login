@@ -19,20 +19,20 @@ public class EmailValidator implements Predicate<String> {
         return true;
     }
 
-//    @Override
-//    public Predicate<String> and(Predicate<? super String> other) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Predicate<String> negate() {
-//        return null;
-//    }
-//
-//    @Override
-//    public Predicate<String> or(Predicate<? super String> other) {
-//        return null;
-//    }
+    @Override
+    public Predicate<String> and(Predicate<? super String> other) {
+        return null;
+    }
+
+    @Override
+    public Predicate<String> negate() {
+        return null;
+    }
+
+    @Override
+    public Predicate<String> or(Predicate<? super String> other) {
+        return null;
+    }
 
 
 

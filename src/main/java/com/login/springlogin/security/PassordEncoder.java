@@ -1,10 +1,3 @@
-/*
-  Created by:oumar
-  Project:spring-login
-  Name:PassordEncoder
-  Date: 8/14/2021
-  Time: 12:44 PM
-*/
 package com.login.springlogin.security;
 
 import org.springframework.context.annotation.Bean;
@@ -19,5 +12,4 @@ public class PassordEncoder
     {
         return new BCryptPasswordEncoder();
     }
-
 }
