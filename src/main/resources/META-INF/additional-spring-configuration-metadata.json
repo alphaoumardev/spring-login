@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "mail",
-      "type": "java.lang.String",
-      "description": "Description for mail."
-  }
-] }

@@ -1,7 +1,7 @@
 package com.login.springlogin.users;
 
-import com.login.springlogin.register.token.Comfirmation;
-import com.login.springlogin.register.token.ComfirmationService;
+import com.login.springlogin.register.token.TokenModel;
+import com.login.springlogin.register.token.TokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +19,7 @@ public class UserService implements UserDetailsService
     private final UserRepo userRepo;
     private final static String USERNAME_NOT_FOUND_EXCEPTION="The user with this %s is not found";
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final ComfirmationService comfirmationService;
+    private final TokenService tokenService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
@@ -28,24 +28,37 @@ public class UserService implements UserDetailsService
                 .orElseThrow(()->
                         new UsernameNotFoundException(String.format(USERNAME_NOT_FOUND_EXCEPTION,email)));
     }
-    public String signUp(User user)
+
+    public String signUp(UserModel userModel)
     {
-        boolean userExists= userRepo.findByEmail(user.getEmail()).isPresent();//we have to add the present
+        boolean userExists= userRepo.findByEmail(userModel.getEmail()).isPresent();//we have to add the present
         if(userExists)
         {
+//            TODO check the attributes are the same and
+//            TODO if the email is not confirmed, resend it again
+
             throw new IllegalStateException("The email is been taken");
         }
 
-        String encodedPassword=bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);//to set the new password
+        String encodedPassword=bCryptPasswordEncoder.encode(userModel.getPassword());
+        userModel.setPassword(encodedPassword);//to set the new password
 
-        userRepo.save(user);//and then save the user
-//        TODO send comfirmation taken forward
-        String uuid = UUID.randomUUID().toString();
-        Comfirmation comfirmationToken = new Comfirmation(uuid,LocalDateTime.now(),LocalDateTime.now().plusMinutes(15),user);
+        userRepo.save(userModel);//and then save the user
+        String newToken = UUID.randomUUID().toString();
 
-        comfirmationToken.saveComfirmation(comfirmationToken);
+        TokenModel bean = new TokenModel(
+                newToken,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(10),
+                userModel);
+
+        tokenService.saveToken(bean);
 //        TODO send  email
-        return uuid;
+        return newToken;
+    }
+
+    public int enableUser(String email)
+    {
+        return userRepo.enableUser(email);
     }
 }

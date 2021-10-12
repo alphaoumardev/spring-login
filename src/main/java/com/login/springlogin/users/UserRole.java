@@ -9,5 +9,6 @@ package com.login.springlogin.users;
 
 public enum UserRole
 {
-    USER,ADMIN
+    USER,
+    ADMIN
 }

@@ -11,20 +11,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value="/register")
 @AllArgsConstructor
+@RequestMapping(path="/register")
 public class RegisterController
 {
-    private final RegistrationService registrationService;
+    private final RegisterService registerService;
 
     @PostMapping
-    public String registeration(@RequestBody RegistrationRequest request)
+    public String registeration(@RequestBody RegisterModel request)
     {
-        return registrationService.register(request);
+        return registerService.register(request);
     }
     @GetMapping(path="/confirm")
     public String confirm(@RequestParam("token")String token )
     {
-        return registrationService.confirmToken(token);
+        return registerService.confirmToken(token);
     }
 }

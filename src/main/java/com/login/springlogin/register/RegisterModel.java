@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class RegistrationRequest
+public class RegisterModel
 {
     @Id
     int Id;

@@ -5,7 +5,7 @@
   Date: 8/14/2021
   Time: 12:41 PM
 */
-package com.login.springlogin.security.config;
+package com.login.springlogin.security;
 
 import com.login.springlogin.users.UserService;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/register")
+                .antMatchers("/register/*")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
