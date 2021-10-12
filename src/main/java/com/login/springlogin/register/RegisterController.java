@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path="/register")
+@RequestMapping("/register")
 public class RegisterController
 {
     private final RegisterService registerService;
 
-    @PostMapping
+    @PostMapping("/send")
     public String registeration(@RequestBody RegisterModel request)
     {
         return registerService.register(request);
     }
-    @GetMapping(path="/confirm")
+    @GetMapping("/confirm")
     public String confirm(@RequestParam("token")String token )
     {
         return registerService.confirmToken(token);

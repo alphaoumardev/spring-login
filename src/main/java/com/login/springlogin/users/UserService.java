@@ -17,9 +17,9 @@ import java.util.UUID;
 public class UserService implements UserDetailsService
 {
     private final UserRepo userRepo;
-    private final static String USERNAME_NOT_FOUND_EXCEPTION="The user with this %s is not found";
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenService tokenService;
+    private final static String USERNAME_NOT_FOUND_EXCEPTION="The user with this %s is not found";
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
@@ -40,25 +40,25 @@ public class UserService implements UserDetailsService
             throw new IllegalStateException("The email is been taken");
         }
 
-        String encodedPassword=bCryptPasswordEncoder.encode(userModel.getPassword());
+        String encodedPassword = bCryptPasswordEncoder.encode(userModel.getPassword());
         userModel.setPassword(encodedPassword);//to set the new password
 
         userRepo.save(userModel);//and then save the user
-        String newToken = UUID.randomUUID().toString();
+        String token = UUID.randomUUID().toString();
 
         TokenModel bean = new TokenModel(
-                newToken,
+                token,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusMinutes(10),
                 userModel);
 
         tokenService.saveToken(bean);
 //        TODO send  email
-        return newToken;
+        return token;
     }
 
-    public int enableUser(String email)
+    public void enableUser(String email)
     {
-        return userRepo.enableUser(email);
+        userRepo.enableUser(email);
     }
 }

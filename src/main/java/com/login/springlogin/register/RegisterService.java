@@ -40,21 +40,24 @@ public class RegisterService
         String token= userService.signUp(
                 new UserModel(
                         request.getName(),
-                        request.getUsername(),
                         request.getPassword(),
-                        request.getEmail(), UserRole.USER));
+                        request.getEmail(),
+                        UserRole.USER));
 
         String link="http://localhost:1212/register/confirm?token="+token;
+
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getName(),link));
+                buildEmail(request.getName(),link));// these two are just bellow from the buildEmail function
         return token;
     }
 
     @Transactional
     public String confirmToken(String token)
     {
-        TokenModel tokenModel = tokenService.getToken(token).orElseThrow(() -> new IllegalStateException("The token is not found"));
+        TokenModel tokenModel = tokenService.getToken(token).orElseThrow(() ->
+                new IllegalStateException("The token is not found"));
+
         if (tokenModel.getConfirmedAt() != null)
         {
             throw new IllegalStateException("The email is been confirmed");

@@ -25,16 +25,16 @@ import java.util.Collections;
 public class UserModel implements UserDetails// we implements the userDetails
 {
     @Id
-    @SequenceGenerator(name="Student",sequenceName="Student",allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="Student")
+    @SequenceGenerator(name="UserModel",sequenceName="UserModel",allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="UserModel")
     private Long id;
-    private String password;
     private String name;
     private String email;
-    private boolean locked=false;
-    private boolean enabled=false;
+    private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+    private boolean locked=false;
+    private boolean enabled=false;
 
 
     public UserModel(String name, String password, String email, UserRole userRole)
@@ -42,14 +42,7 @@ public class UserModel implements UserDetails// we implements the userDetails
         this.name = name;
         this.email = email;
         this.password = password;
-        this.userRole = userRole;
-
-    }
-
-    public UserModel(String name, String username, String password, String email, UserRole user) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+        this.userRole= userRole;
     }
 
     @Override
@@ -60,32 +53,39 @@ public class UserModel implements UserDetails// we implements the userDetails
     }
 
     @Override
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
+    public String getName(){return name;}
     @Override
-    public String getUsername() {
+    public String getUsername()
+    {
         return email;
     }
 
     @Override
-    public boolean isAccountNonExpired() {
+    public boolean isAccountNonExpired()
+    {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() {
+    public boolean isAccountNonLocked()
+    {
         return !locked;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
+    public boolean isCredentialsNonExpired()
+    {
         return true;
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
         return enabled;
     }
 }
