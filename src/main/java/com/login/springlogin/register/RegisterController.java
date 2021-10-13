@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/register")
+@RequestMapping("api/v1/registration")
 public class RegisterController
 {
     private final RegisterService registerService;
 
-    @PostMapping("/send")
+    @PostMapping()
     public String registeration(@RequestBody RegisterModel request)
     {
         return registerService.register(request);

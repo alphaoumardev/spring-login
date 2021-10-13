@@ -21,8 +21,8 @@ import java.time.LocalDateTime;
 public class TokenModel
 {
     @Id
-    @SequenceGenerator(name="Comfirmation",sequenceName="Comfirmation",allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="Comfirmation")
+    @SequenceGenerator(name="Tokens",sequenceName="Tokens",allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="Tokens")
     private Long id;
 
     @Column(nullable=false)

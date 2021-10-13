@@ -31,5 +31,4 @@ public class TokenService
     {
         tokenRepo.updateConfirmedAt(token, LocalDateTime.now());
     }
-
 }

@@ -44,7 +44,7 @@ public class RegisterService
                         request.getEmail(),
                         UserRole.USER));
 
-        String link="http://localhost:1212/register/confirm?token="+token;
+        String link="http://localhost:8080/api/v1/registration/confirm?token=" + token;
 
         emailSender.send(
                 request.getEmail(),
@@ -74,7 +74,6 @@ public class RegisterService
         userService.enableUser(tokenModel.getUserModel().getEmail());
         return " The email has been Confirmed";
     }
-
 //    This is to build an email
     private String buildEmail(String name, String link)
     {

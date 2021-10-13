@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService
         TokenModel bean = new TokenModel(
                 token,
                 LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(10),
+                LocalDateTime.now().plusMinutes(15),
                 userModel);
 
         tokenService.saveToken(bean);
@@ -57,8 +57,8 @@ public class UserService implements UserDetailsService
         return token;
     }
 
-    public void enableUser(String email)
+    public int enableUser(String email)
     {
-        userRepo.enableUser(email);
+        return userRepo.enableUser(email);
     }
 }

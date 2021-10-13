@@ -36,7 +36,6 @@ public class UserModel implements UserDetails// we implements the userDetails
     private boolean locked=false;
     private boolean enabled=false;
 
-
     public UserModel(String name, String password, String email, UserRole userRole)
     {
         this.name = name;
@@ -51,6 +50,7 @@ public class UserModel implements UserDetails// we implements the userDetails
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
         return Collections.singletonList(authority);
     }
+    public String getName(){return name;}
 
     @Override
     public String getPassword()
@@ -58,7 +58,6 @@ public class UserModel implements UserDetails// we implements the userDetails
         return password;
     }
 
-    public String getName(){return name;}
     @Override
     public String getUsername()
     {
