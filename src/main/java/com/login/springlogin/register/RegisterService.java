@@ -39,7 +39,8 @@ public class RegisterService
         // not work       emailSender.send(request.getEmail(),"oumardialo98@qq.com");
         String token= userService.signUp(
                 new UserModel(
-                        request.getName(),
+                        request.getFirstName(),
+                        request.getLastName(),
                         request.getPassword(),
                         request.getEmail(),
                         UserRole.USER));
@@ -48,7 +49,7 @@ public class RegisterService
 
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getName(),link));// these two are just bellow from the buildEmail function
+                buildEmail(request.getFirstName(),link));// these two are just bellow from the buildEmail function
         return token;
     }
 
@@ -63,7 +64,7 @@ public class RegisterService
             throw new IllegalStateException("The email is been confirmed");
         }
 
-        LocalDateTime expiredAt= tokenModel.getExpiresAt();
+        LocalDateTime expiredAt = tokenModel.getExpiresAt();
 
         if(expiredAt.isBefore(LocalDateTime.now()))
         {
@@ -72,7 +73,7 @@ public class RegisterService
 
         tokenService.setConfirmedAt(token);
         userService.enableUser(tokenModel.getUserModel().getEmail());
-        return " The email has been Confirmed";
+        return " The email has been confirmed!";
     }
 //    This is to build an email
     private String buildEmail(String name, String link)

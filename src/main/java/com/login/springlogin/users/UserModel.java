@@ -17,18 +17,19 @@ import java.util.Collection;
 import java.util.Collections;
 
 
+@Getter
+@Setter
 @Entity
 @EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class UserModel implements UserDetails// we implements the userDetails
 {
     @Id
     @SequenceGenerator(name="UserModel",sequenceName="UserModel",allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator="UserModel")
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
@@ -36,9 +37,10 @@ public class UserModel implements UserDetails// we implements the userDetails
     private boolean locked=false;
     private boolean enabled=false;
 
-    public UserModel(String name, String password, String email, UserRole userRole)
+    public UserModel(String firstName,String lastName, String password, String email, UserRole userRole)
     {
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.userRole= userRole;
@@ -50,7 +52,8 @@ public class UserModel implements UserDetails// we implements the userDetails
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
         return Collections.singletonList(authority);
     }
-    public String getName(){return name;}
+
+
 
     @Override
     public String getPassword()
@@ -63,6 +66,10 @@ public class UserModel implements UserDetails// we implements the userDetails
     {
         return email;
     }
+
+    public String getFirstName() {return firstName;}
+
+    public String getLastName() {return lastName;}
 
     @Override
     public boolean isAccountNonExpired()

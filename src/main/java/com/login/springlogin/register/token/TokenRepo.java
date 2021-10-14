@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
+@Transactional
 public interface TokenRepo extends JpaRepository<TokenModel, Long>
 {
     Optional<TokenModel> findByToken(String token);
@@ -17,5 +18,5 @@ public interface TokenRepo extends JpaRepository<TokenModel, Long>
     @Transactional
     @Modifying
     @Query("UPDATE TokenModel c SET c.confirmedAt = ?2 WHERE  c.token = ?1")
-    void updateConfirmedAt(String token,  LocalDateTime confirmedAt);
+    int updateConfirmedAt(String token,  LocalDateTime confirmedAt);
 }

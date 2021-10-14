@@ -23,12 +23,14 @@ public class TokenService
     {
         tokenRepo.save(token);
     }
+
     public Optional<TokenModel> getToken(String token)
     {
         return tokenRepo.findByToken(token);
     }
-    public void setConfirmedAt(String token)
+
+    public int setConfirmedAt(String token)
     {
-        tokenRepo.updateConfirmedAt(token, LocalDateTime.now());
+        return tokenRepo.updateConfirmedAt(token, LocalDateTime.now());
     }
 }

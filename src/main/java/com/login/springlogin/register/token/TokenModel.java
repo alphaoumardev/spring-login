@@ -8,16 +8,17 @@
 package com.login.springlogin.register.token;
 
 import com.login.springlogin.users.UserModel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
-@NoArgsConstructor
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class TokenModel
 {
     @Id
@@ -35,7 +36,7 @@ public class TokenModel
     private LocalDateTime expiresAt;
 
     @ManyToOne
-    @JoinColumn(nullable=false )
+    @JoinColumn(nullable=false, name = "user_id")
     private UserModel userModel;
 
     private LocalDateTime confirmedAt;
@@ -49,3 +50,6 @@ public class TokenModel
         this.userModel = userModel;
     }
 }
+
+
+
