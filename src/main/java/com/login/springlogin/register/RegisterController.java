@@ -17,10 +17,11 @@ public class RegisterController
 {
     private final RegisterService registerService;
 
-    @PostMapping()
+    @RequestMapping
     public String registeration(@RequestBody RegisterModel request)
     {
         return registerService.register(request);
+//        return registerService.register(request);
     }
     @GetMapping("confirm")
     public String confirm(@RequestParam("token")String token )
