@@ -29,7 +29,7 @@ public class EmailService implements EmailSender
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject("Please Confirm your email in your email box");
-            helper.setFrom("oumardialo98@gmail.com");
+            helper.setFrom("oumardialo98@mgmail.com");
 
             mailSender.send(message);
         }
